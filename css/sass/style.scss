@@ -27,6 +27,14 @@ button {
     left: 0;
     z-index: 1;
     padding: 10px;
+    .title {
+        color: #fff;
+        font-size: 1.5em;
+    }
+    .resume-button {
+        float: right;
+        margin-right: 20px;
+    }
 }
 
 .global-wrapper {

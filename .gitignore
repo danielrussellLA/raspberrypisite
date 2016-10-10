@@ -2,3 +2,5 @@ node_modules
 README.txt
 css/style.css
 .sass-cache
+data/data.json
+css/style.css.map

@@ -71,8 +71,7 @@ if(cluster.isMaster) {
         writeData('data/data.json', request.body, request, response);
     });
 
-    var server = http.createServer(app).listen(process.env.PORT || 3000);
-    console.log('listening on port 3000');
-
-
+    var PORT = process.env.PORT || 3000;
+    var server = http.createServer(app).listen(PORT);
+    console.log('listening on port '+PORT);
 }

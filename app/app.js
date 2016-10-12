@@ -51,14 +51,13 @@ $(document).ready(function(){
         }
     });
 
-    function postContent(data){
+    function postContent(blog_posts){
         $.ajax({
             type: 'POST',
             url: '/content',
-            data: JSON.stringify(data),
+            data: JSON.stringify(blog_posts),
             complete: function(req, res){
-                refreshContent();
-                displayContent(JSON.parse(req.responseText));
+                displayContent(data);
             },
             error: function(err){
                 console.log('err', err);

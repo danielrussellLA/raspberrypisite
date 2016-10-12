@@ -1,12 +1,3 @@
-var express = require('express');
-var http = require('http');
-var morgan = require('morgan');
-var bodyParser = require('body-parser');
-var fs = require('fs');
-var moment = require('moment');
-var _ = require('lodash');
-
-
 var cluster = require('cluster');
 
 if(cluster.isMaster) {
@@ -28,6 +19,13 @@ if(cluster.isMaster) {
         cluster.fork();
     });
 } else {
+	var express = require('express');
+	var http = require('http');
+	var morgan = require('morgan');
+	var bodyParser = require('body-parser');
+	var fs = require('fs');
+	var moment = require('moment');
+	// var _ = require('lodash');
 
     var app = express();
     app.use(morgan('dev'));

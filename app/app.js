@@ -82,6 +82,9 @@ $(document).ready(function(){
                 });
             } else {
                 data.forEach(function(item, index){
+                    if(item.date === undefined){
+                        item.date = '';
+                    }
                     if(index === 0){
                         var result = $('<div class="blogPost">'+'<div class="blog-post-inner-container">'+'<h1 class="blog-post-title">'+item.title+'</h1>'+'<div class="date">'+item.date+'</div>'+'<pre class="blog-post-content">'+item.content+'</pre>'+'</div>'+'</div>');
                         $(".comments").append(result.hide().fadeIn(600));

@@ -1,18 +1,16 @@
 'use-strict';
 
-
-
 $(document).ready(function(){
 
     // if poster is not in this location, dont let them post blogs
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(function(position) {
-        if(Math.floor(position.coords.latitude) !== 34 && Math.floor(position.coords.longitude) !== -119){
-            $('#blog-post-form').remove();
-            console.log(Math.floor(position.coords.latitude), Math.floor(position.coords.longitude))
-        }
-      });
-    }
+    // if ("geolocation" in navigator) {
+    //   navigator.geolocation.getCurrentPosition(function(position) {
+    //     if(Math.floor(position.coords.latitude) !== 34 && Math.floor(position.coords.longitude) !== -119){
+    //         $('#blog-post-form').remove();
+    //         console.log(Math.floor(position.coords.latitude), Math.floor(position.coords.longitude))
+    //     }
+    //   });
+    // }
 
     var data = null;
 

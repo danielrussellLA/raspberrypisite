@@ -1,3 +1,4 @@
+'use-strict';
 var cluster = require('cluster');
 
 if(cluster.isMaster) {
@@ -20,6 +21,7 @@ if(cluster.isMaster) {
     });
 
 } else {
+    // dependencies
     var express = require('express');
     var http = require('http');
     var morgan = require('morgan');
@@ -27,13 +29,16 @@ if(cluster.isMaster) {
     var fs = require('fs');
     var moment = require('moment');
 
+    // instantiate express app
     var app = express();
+
+    // middleware
     app.use(morgan('dev'));
     app.use(express.static(__dirname));
     app.use(bodyParser.urlencoded({extended: true}));
     app.use(bodyParser.json());
 
-
+    // helpers
     function getData(file, response){
         fs.readFile(file, 'utf-8', function(err, data){
             if(err){
@@ -61,6 +66,7 @@ if(cluster.isMaster) {
         });
     }
 
+    // routes
     app.route('/content')
     .get(function(request, response){
         getData('data/data.json', response);
@@ -74,13 +80,15 @@ if(cluster.isMaster) {
     //     getData('data/blog_form.json', response);
     // });
 
+    // server
     var PORT = process.env.PORT || 3000;
     var server = http.createServer(app).listen(PORT);
     console.log('listening on port '+PORT);
 
-    // this block of code prevents the server from having to make a bunch of different SSL calls for each get request
-    server.on('connection', function(socket) {
-        console.log("A new connection was made by a client.");
-        socket.setTimeout(30 * 1000);
-    });
+    // this code prevents the server from having to make a bunch of different SSL calls for each get request
+    // server.on('connection', function(socket) {
+    //     console.log("A new connection was made by a client.");
+    //     socket.setTimeout(30 * 1000);
+    // });
+
 }

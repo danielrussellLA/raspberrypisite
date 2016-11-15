@@ -1,0 +1,6 @@
+[
+    {
+        "result":
+        "<form><div class='section-header'><h1>Blog</h1></div><div class='section'><div class='blog-post-form'><p>Title</p><input class='blog-post-form-title' type='text'/><p>Content</p><pre contenteditable></pre><div class=buttons-container><button id='delete' class='delete'>delete</button><button id='post-blog-button' class='post' style='margin-left:10px;'>post</button></div></div></div></form>"
+    }
+]

@@ -1,2 +1,2 @@
 #!/bin/bash
-concurrently 'sass --watch css/sass:css --style compressed' 'nodemon server.js'
+concurrently 'sass --watch css/sass:css/sass --style compressed' 'nodemon server.js'

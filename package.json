@@ -13,6 +13,8 @@
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "jquery": "^3.1.1",
+    "jquery-lazyload": "^1.9.7",
+    "lazy-load": "0.0.2",
     "lodash": "^4.16.4",
     "moment": "^2.15.1",
     "morgan": "^1.7.0"

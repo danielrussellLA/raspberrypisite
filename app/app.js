@@ -1,12 +1,25 @@
-$(document).ready(function(){
-    var data = null;
+'use-strict';
 
+
+
+$(document).ready(function(){
+
+    // if poster is not in this location, dont let them post blogs
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        if(Math.floor(position.coords.latitude) !== 34 && Math.floor(position.coords.longitude) !== -119){
+            $('#blog-post-form').remove();
+            console.log(Math.floor(position.coords.latitude), Math.floor(position.coords.longitude))
+        }
+      });
+    }
+
+    var data = null;
 
     function refreshContent(firstTime){
         $.get('/content', function(req, res){
             data = JSON.parse(req);
             displayContent(data, firstTime);
-            console.log('req', data);
         });
     }
     refreshContent(true);
@@ -14,16 +27,17 @@ $(document).ready(function(){
     $('#post-blog-button').on('click', function(e){
         e.preventDefault();
         var index = data.length;
+        var blogPostFormTitle = $('.blog-post-form-title');
+        var blogPostFormContent = $('.blog-post-form-content');
         var post = {
             id: index,
-            title: $('.blog-post-form-title').val(),
-            content: $('.blog-post-form-content')[0].innerText
+            title: blogPostFormTitle.val(),
+            content: blogPostFormContent[0].innerText
         };
-        console.log($('.blog-post-form-content'));
         data.unshift(post);
         postContent(data);
-        $('.blog-post-form-title').val('');
-        $('.blog-post-form-content')[0].innerText = '';
+        blogPostFormTitle.val('');
+        blogPostFormContent[0].innerText = '';
     });
 
     $('#delete').on('click', function(e){
@@ -33,22 +47,19 @@ $(document).ready(function(){
 
 
     $('.resume').hide();
-    var toggleResume = false;
     $('.resume-button').on('click', function(e){
         e.preventDefault();
-        toggleResume = !toggleResume;
-        if(toggleResume){
-            $('.blog-post-form-container').hide();
-            $('.comments').hide();
-            $('.intro').hide();
-            $('.resume').hide().fadeIn();
-        }
-        else {
-            $('.resume').hide();
-            $('.intro').hide().fadeIn();
-            $('.blog-post-form-container').hide().fadeIn();
-            $('.comments').hide().fadeIn();
-        }
+        $('.blog-post-form-container').hide();
+        $('.comments').hide();
+        $('.intro').hide();
+        $('.resume').hide().fadeIn(800);
+    });
+    $('.logo').on('click', function(e){
+        e.preventDefault();
+        $('.resume').hide();
+        $('.intro').hide().fadeIn(800);
+        $('.blog-post-form-container').hide().fadeIn(800);
+        $('.comments').hide().fadeIn(800);
     });
 
     function postContent(blog_posts){
@@ -73,24 +84,25 @@ $(document).ready(function(){
     }
 
     function displayContent(data, firstTime){
-        $('.comments').children().remove();
+        var comments = $('.comments');
+        comments.children().remove();
         if(data.length){
             if(firstTime){
                 data.forEach(function(item, index){
-                    var result = $('<div class="blogPost">'+'<div class="blog-post-inner-container">'+'<h1 class="blog-post-title">'+item.title+'</h1>'+'<div class="date">'+item.date+'</div>'+'<pre class="blog-post-content">'+item.content+'</pre>'+'</div>'+'</div>');
-                    $(".comments").append(result.hide().fadeIn(300 + index));
+                    var result = $("<div class='blogPost'><div class='blog-post-header'><h1 class='blog-post-title'>"+item.title+"</h1><span class='date'>"+item.date+"</span></div><div class='blog-post-body'><pre class='blog-post-content'>"+item.content+"</pre></div></div>");
+                    comments.append(result.hide().fadeIn(300 + index));
                 });
             } else {
                 data.forEach(function(item, index){
                     if(item.date === undefined){
-                        item.date = '';
+                        item.date = 'Today';
                     }
                     if(index === 0){
-                        var result = $('<div class="blogPost">'+'<div class="blog-post-inner-container">'+'<h1 class="blog-post-title">'+item.title+'</h1>'+'<div class="date">'+item.date+'</div>'+'<pre class="blog-post-content">'+item.content+'</pre>'+'</div>'+'</div>');
-                        $(".comments").append(result.hide().fadeIn(600));
+                        var result = $("<div class='blogPost'><div class='blog-post-header'><h1 class='blog-post-title'>"+item.title+"</h1><span class='date'>"+item.date+"</span></div><div class='blog-post-body'><pre class='blog-post-content'>"+item.content+"</pre></div></div>");
+                        comments.append(result.hide().fadeIn(600));
                         return;
                     }
-                    $('.comments').append('<div class="blogPost">'+'<div class="blog-post-inner-container">'+'<h1 class="blog-post-title">'+item.title+'</h1>'+'<div class="date">'+item.date+'</div>'+'<pre class="blog-post-content">'+item.content+'</pre>'+'</div>'+'</div>');
+                    comments.append("<div class='blogPost'><div class='blog-post-header'><h1 class='blog-post-title'>"+item.title+"</h1><span class='date'>"+item.date+"</span></div><div class='blog-post-body'><pre class='blog-post-content'>"+item.content+"</pre></div></div>");
                 });
             }
 

@@ -1,54 +1,143 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta content="width=device-width,initial-scale=1.0" name="viewport">
-        <meta charset="utf-8">
-        <title>Daniel Russell - Software Engineer</title>
-        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-        <link href='css/style.css' rel='stylesheet'/>
-        <script src='node_modules/jquery/dist/jquery.min.js'></script>
-        <script src='node_modules/lodash/lodash.min.js'></script>
-        <script src='app/app.js'></script>
-    </head>
-    <body>
-        <div class='navBar'>
-            <span class='title'>Daniel Russell</span>
-            <button class='resume-button'>Resume</button>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1.0" name="viewport">
+    <title>Daniel Russell - Software Engineer</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
+    <link href='css/sass/style.css' rel='stylesheet'/>
+    <script src='node_modules/jquery/dist/jquery.min.js'></script>
+    <script src='node_modules/lodash/lodash.min.js'></script>
+    <script src='app/app.js'></script>
+</head>
+<body>
+    <div class='navbar'>
+        <div class='inner-navbar-container'>
+            <a class='logo'>Daniel Russell</a>
+            <a class='resume-button'>Resume</a>
+            <div class="contactLinks1">
+                <a href="mailto:contactdanielrussell@gmail.com" target="_blank" type="email">
+                    <i class="fa fa-envelope fa-3x" aria-hidden="true"></i>
+                </a>
+                <a href="https://github.com/danielrussellLA" target="_blank">
+                    <i class="fa fa-github fa-3x" aria-hidden="true"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/danielrussellla" target="_blank">
+                    <i class="fa fa-linkedin fa-3x" aria-hidden="true"></i>
+                </a>
+                <a href="https://twitter.com/danielrussellLA" target="_blank">
+                    <i class="fa fa-twitter fa-3x" aria-hidden="true"></i>
+                </a>
+            </div>
         </div>
-        <div class='global-wrapper'>
-            <div class='resume'>
-                <div class='inner-container'>
-                    <h1>Resume</h1>
+    </div>
+    <div class="contactLinks2">
+        <a href="mailto:contactdanielrussell@gmail.com" target="_blank" type="email">
+            <i class="fa fa-envelope fa-3x" aria-hidden="true"></i>
+        </a>
+        <a href="https://github.com/danielrussellLA" target="_blank">
+            <i class="fa fa-github fa-3x" aria-hidden="true"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/danielrussellla" target="_blank">
+            <i class="fa fa-linkedin fa-3x" aria-hidden="true"></i>
+        </a>
+        <a href="https://twitter.com/danielrussellLA" target="_blank">
+            <i class="fa fa-twitter fa-3x" aria-hidden="true"></i>
+        </a>
+    </div>
+    <div class='global-wrapper'>
+
+
+        <div class='resume'>
+            <div class='section-header'>
+                <h1>Resume</h1>
+            </div>
+            <div class='section'>
+                <div class='sub-section'>
                     <h1>Daniel Russell</h1>
+                    <h4>Software Engineer</h4>
+                </div>
+                <div class='sub-section'>
+                    <h2>Technologies</h2>
+                    <h4>JavaScript, Node.js, React.js, AngularJS, Python/Flask, SQL, jQuery, Knex with BookShelf, MongoDb, Backbone.js, Bootsrap, D3.js, Google Maps/Places/Geometry API, svg/sprite animation, AJAX, Git, Mocha.js, Chai.js, CoffeeScript, Regex, HTML, CSS, Swift, Ruby</h4>
+                </div>
+                <div class='sub-section'>
+                    <h2>Experience</h2>
                     <h3>Software Engineer</h3>
-                    <p>I'm a Software Engineer in Santa Monica, CA. I specialize in building JavaScript SPAs with modern frameworks and technologies.</p>
-                    <h4>Technologies</h4>
-                    <p>I'm a Software Engineer in Venice, CA. I build responsive web apps with modern tools and frameworks - like React, Angular, Node, Flask. A puzzle solver with a keen eye for design - I'll tackle any backend or frontend project.</p>
+                    <span class='date'>2016 - current</span>
+                    <h4>OpenMail</h4>
+                    <ul>
+                        <li>Build client-facing software with AngularJS, Less, Python, Flask, and Jinja2</li>
+                    </ul>
+                </div>
+                <div class='sub-section'>
+                    <h3>Software Engineering Mentor</h3>
+                    <span class='date'>2015 - 2016</span>
+                    <h4>Hack Reactor</h4>
+                    <ul>
+                        <li>Teach JavaScript software engineering fundamentals, CS concepts, and modern javascript libraries and frameworks to students</li>
+                        <li>Mentor the technical and emotional development and well being of over 100 students
+                        </li>
+                        <li>Serve as the point man for all of the student's technical questions</li>
+                        <li>Conduct all after hour activities such as hackathons, guest speakers, and review sessions
+                        </li>
+                    <ul>
+                </div>
+                <div class='sub-section'>
+                    <h3>Web QA Analyst</h3>
+                    <span class='date'>2014 -2015</span>
+                    <h4>incite*</h4>
+                    <ul>
+                        <li>UI functional testing across mobile and desktop platforms and browsers (iOS, Android, OS X, Windows).</li>
+                        <li>Responsive web integration and functional testing for domestic and international webpages and microsites.
+                        </li>
+                    </ul>
+                </div>
+                <div class='sub-section'>
+                    <h2>Education</h2>
+                    <h3>Hack Reactor</h3>
+                    <span class='date'>2015</span>
+                    <h4>full-stack software engineering immersive</h4>
+                    <h3>UC Santa Barbara</h3><span class='date'>2013</span>
+                    <h4>B.A</h4>
                 </div>
             </div>
-            <div class='intro'>
-                <div class='inner-container'>
-                    <h1>Daniel Russell</h1>
-                    <h3>Software Engineer</h3>
-                    <p>I'm a Software Engineer in Santa Monica, CA. I specialize in building JavaScript SPAs with modern frameworks and technologies.</p>
-                    <h4>Technologies</h4>
-                    <p>I'm a Software Engineer in Venice, CA. I build responsive web apps with modern tools and frameworks - like React, Angular, Node, Flask. A puzzle solver with a keen eye for design - I'll tackle any backend or frontend project.</p>
-                </div>
+        </div>
+
+        <div class='intro'>
+            <div class='section-header'>
+                <h1>Hi there!</h1>
             </div>
-            <div class='blog-post-form-container'>
-                <form class='blog-post-form'>
-                    <div class='blog-post-form-inner-container'>
-                        <h1>Write a Blog Post</h1>
+            <div class='section'>
+                <p>You made it to my site! Which means you're probably checking out my code on github or perusing linkedin looking to hire a software engineer for your team.</p>
+                <h4>You came to the right place</h4>
+                <p>I'm a Software Engineer in Los Angeles, CA. I specialize in building JavaScript SPAs with modern frameworks and technologies.</p>
+                <p>Scroll down to check out my blog and see what I've been up to lately.</p>
+            </div>
+
+            <!-- <div id='blog-post-form'></div> -->
+            <div class='section-header' style='border-bottom: 1px solid #DEE0E5'>
+                <h1>Blog</h1>
+            </div>
+            <form id='blog-post-form'>
+                <div class='section'>
+                    <div class='blog-post-form'>
                         <p>Title</p>
                         <input class='blog-post-form-title' type='text'/>
                         <p>Content</p>
                         <pre class='blog-post-form-content' contenteditable></pre>
-                        <button id='post-blog-button'>post</button>
-                        <button id='delete'>delete</button>
+                        <div class=buttons-container>
+                            <button class='delete' id='delete'>delete</button>
+                            <button class='post' id='post-blog-button'>post</button>
+                        </div>
                     </div>
-                </form>
-            </div>
+                </div>
+            </form>
+
             <div class='comments'></div>
+
         </div>
-    </body>
+    </div>
+</body>
 </html>

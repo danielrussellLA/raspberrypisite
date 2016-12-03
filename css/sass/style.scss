@@ -265,6 +265,7 @@ body, html {
         }
         ul {
             padding: 0;
+            padding-left: 15px;
             margin: 0;
             line-height: 1.5rem;
         }
@@ -274,7 +275,7 @@ body, html {
             font-size: 1.5rem;
         }
         h2 {
-            margin-bottom: 10px;
+            margin-bottom: 5px;
             text-transform: uppercase;
             letter-spacing: .05rem;
             font-size: 1.25rem;
@@ -291,11 +292,8 @@ body, html {
             color: #a0a0a5;
             font-weight: 400;
             font-size: .8rem;
-            /*display: inline;*/
-            /*float: left;*/
         }
         p, li {
-            /*margin-bottom: px;*/
             line-height: 1.2rem;
             font-size: .8rem;
         }
@@ -363,13 +361,13 @@ body, html {
     .section,
     .blog-post-body,
     .blog-post-header {
-        padding: 2rem 1.5rem;
+        padding: 1rem;
     }
     .section p,
     .section pre,
     .blog-post-body p,
     .blog-post-body pre, {
-        font-size: 12px;
+        font-size: 11px;
         line-height: 1rem;
     }
     .logo {
@@ -378,5 +376,4 @@ body, html {
     .resume-button {
         font-size: .5rem;
     }
-
 }

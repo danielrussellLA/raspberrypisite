@@ -21,7 +21,7 @@ $(document).ready(function(){
             content: blogPostFormContent[0].innerText
         };
         data.unshift(post);
-        postContent(data);
+        postContent(data, false);
         blogPostFormTitle.val('');
         blogPostFormContent[0].innerText = '';
     });
@@ -48,25 +48,48 @@ $(document).ready(function(){
         $('.comments').hide().fadeIn(800);
     });
 
-    function postContent(blog_posts){
-        $.ajax({
-            type: 'POST',
-            url: '/content',
-            data: JSON.stringify(blog_posts),
-            complete: function(req, res){
-                displayContent(data);
-            },
-            error: function(err){
-                console.log('err', err);
-            },
-            contentType: 'application/json',
-            dataType: 'json'
-        });
+    function postContent(blog_posts, isDeleting){
+        if(isDeleting){
+            $.ajax({
+                type: 'POST',
+                url: '/content',
+                data: JSON.stringify(blog_posts),
+                complete: function(req, res){
+                    displayContent(data);
+                    $('.warning-text').remove();
+                },
+                error: function(err){
+                    console.log('err', err);
+                },
+                contentType: 'application/json',
+                dataType: 'json'
+            });
+            return;
+        }
+        if(!isDeleting && $('.blog-post-form-title').val() !== '' && $('.blog-post-form-content').text() !== ''){
+            $.ajax({
+                type: 'POST',
+                url: '/content',
+                data: JSON.stringify(blog_posts),
+                complete: function(req, res){
+                    displayContent(data);
+                    $('.warning-text').remove();
+                },
+                error: function(err){
+                    console.log('err', err);
+                },
+                contentType: 'application/json',
+                dataType: 'json'
+            });
+        }
+        else {
+            $('#blog-post-form > .section').prepend('<p class="warning-text" style="color: red;text-align:center;">* please fill out all sections</p>');
+        }
     }
 
     function deleteContent(){
         data.shift();
-        postContent(data);
+        postContent(data, true);
     }
 
     function displayContent(data, firstTime){

@@ -169,7 +169,7 @@ body, html {
         max-width: 100%;
         height: 2rem;
         margin: 0 0;
-        padding: 0.9rem 0.9rem;
+        padding: 0.4rem;
         border-radius: 0.1rem;
         outline: none;
         margin-bottom: 1.5rem;
@@ -186,13 +186,12 @@ body, html {
         width: 100%;
         font-size: .85rem !important;
         line-height: 2rem;
-        /*display: inline-block;*/
         font: inherit;
         white-space: pre-wrap;
         word-wrap: break-word;
         min-height: 6rem;
         margin: 0 0;
-        padding: 0.9rem 0.9rem;
+        padding: 0.4rem;
         border-radius: 0.1rem;
         outline: none;
         margin-bottom: 1.5rem;
@@ -249,9 +248,20 @@ body, html {
 }
 
 .resume {
+    .section-header {
+        h4 {
+            margin: 5px 0;
+            color: #a0a0a5 !important;
+            font-weight: 400;
+            font-size: .9rem;
+        }
+    }
     .section {
         .sub-section {
-            padding: 0 0 40px 0;
+            padding: 0 0 20px 0;
+        }
+        .job-entry {
+            padding: 0 0 15px 0;
         }
         ul {
             padding: 0;
@@ -261,26 +271,33 @@ body, html {
         h1 {
             margin-bottom: 0;
             text-transform: uppercase;
-            /*letter-spacing: .05rem;*/
+            font-size: 1.5rem;
         }
         h2 {
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             text-transform: uppercase;
             letter-spacing: .05rem;
+            font-size: 1.25rem;
         }
         h3 {
             margin-bottom: 10px;
             display: inline;
             margin-right: 10px;
+            font-size: .9rem;
         }
         h4 {
             text-align: left;
             margin: 5px 0;
             color: #a0a0a5;
             font-weight: 400;
+            font-size: .8rem;
+            /*display: inline;*/
+            /*float: left;*/
         }
-        p {
-            margin-bottom: 5px;
+        p, li {
+            /*margin-bottom: px;*/
+            line-height: 1.2rem;
+            font-size: .8rem;
         }
         .date {
             font-size: 12px;

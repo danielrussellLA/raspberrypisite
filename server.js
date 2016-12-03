@@ -74,21 +74,8 @@ if(cluster.isMaster) {
     .post(function(request, response){
         writeData('data/data.json', request.body, request, response);
     });
-
-    // app.route('/blog-post-form')
-    // .get(function(request, response){
-    //     getData('data/blog_form.json', response);
-    // });
-
     // server
     var PORT = process.env.PORT || 3000;
     var server = http.createServer(app).listen(PORT);
     console.log('listening on port '+PORT);
-
-    // this code prevents the server from having to make a bunch of different SSL calls for each get request
-    // server.on('connection', function(socket) {
-    //     console.log("A new connection was made by a client.");
-    //     socket.setTimeout(30 * 1000);
-    // });
-
 }

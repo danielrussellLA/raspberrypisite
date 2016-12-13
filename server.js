@@ -27,7 +27,6 @@ if(cluster.isMaster) {
     var bodyParser = require('body-parser');
     var fs = require('fs');
     var moment = require('moment');
-    // var _ = require('lodash');
 
     // instantiate express app
     var app = express();

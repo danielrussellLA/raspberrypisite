@@ -39,6 +39,11 @@ if(cluster.isMaster) {
     app.use(bodyParser.json());
 
     // routes
+    // app.route('/')
+    // .get(function(request, response){
+    //     response.render('index');
+    // });
+
     app.route('/content')
     .get(function(request, response){
         getData('data/data.json', response);
@@ -49,7 +54,7 @@ if(cluster.isMaster) {
 
     app.route('/postblog')
     .get(function(request, response){
-        getData('data/blog-post-form.html', response);
+        getData('blog-post-form.html', response);
     })
     .post(function(request, response){
         writeData('data/data.json', request.body, request, response);
@@ -57,7 +62,7 @@ if(cluster.isMaster) {
 
     app.route('/deleteblog')
     .get(function(request, response){
-        getData('data/delete-blog-post.html', response);
+        getData('delete-blog-post.html', response);
     })
     .post(function(request, response){
         writeData('data/data.json', request.body, request, response);

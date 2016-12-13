@@ -78,6 +78,13 @@ body, html {
         margin: 0;
         font-weight: lighter;
     }
+    h4 {
+        text-align: center;
+        margin: 5px 0;
+        color: #a0a0a5;
+        font-weight: 400;
+        font-size: .9rem;
+    }
     margin: 0 auto;
     margin-top: 15px;
     display: block;
@@ -117,6 +124,9 @@ body, html {
         font-size: 12px;
         margin: 0;
         color: #a0a0a5;
+    }
+    .delete {
+        cursor: pointer;
     }
     margin: 0 auto;
     margin-top: 15px;

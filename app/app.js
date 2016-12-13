@@ -10,6 +10,7 @@ $(document).ready(function(){
     }
     refreshContent(true);
 
+    // listener for posting a new blog
     $('#post-blog-button').on('click', function(e){
         e.preventDefault();
         var index = data.length;
@@ -26,13 +27,15 @@ $(document).ready(function(){
         blogPostFormContent[0].innerText = '';
     });
 
-    $('#delete').on('click', function(e){
-        e.preventDefault();
-        deleteContent();
-    });
+    // $('#delete').on('click', function(e){
+    //     e.preventDefault();
+    //     deleteContent();
+    // });
 
 
+    // hide resume on load
     $('.resume').hide();
+    // reveal resume
     $('.resume-button').on('click', function(e){
         e.preventDefault();
         $('.blog-post-form-container').hide();
@@ -40,6 +43,7 @@ $(document).ready(function(){
         $('.intro').hide();
         $('.resume').hide().fadeIn(800);
     });
+    // reveal home
     $('.logo').on('click', function(e){
         e.preventDefault();
         $('.resume').hide();
@@ -48,6 +52,28 @@ $(document).ready(function(){
         $('.comments').hide().fadeIn(800);
     });
 
+    // Delete single blogPost
+    $(document.body).on('click', '.delete', function(e){
+        e.preventDefault()
+        var blogPostId = $(this).closest('.blogPost')[0].attributes.data.value;
+        data.splice(blogPostId, 1);
+        $.ajax({
+            type: 'POST',
+            url: '/delete-single-blog-post',
+            data: JSON.stringify({blogPostId: blogPostId}),
+            complete: function(req, res){
+                console.log(req.responseJSON);
+                displayContent(req.responseJSON, false);
+            },
+            error: function(err){
+                console.log('err', err);
+            },
+            contentType: 'application/json',
+            dataType: 'json'
+        });
+    });
+
+    // Post a new blog post
     function postContent(blog_posts, isDeleting){
         if(isDeleting){
             $.ajax({
@@ -87,34 +113,46 @@ $(document).ready(function(){
         }
     }
 
-    function deleteContent(){
-        data.shift();
-        postContent(data, true);
-    }
-
+    // display blog posts
     function displayContent(data, firstTime){
         var comments = $('.comments');
         comments.children().remove();
-        if(data.length){
-            if(firstTime){
-                data.forEach(function(item, index){
-                    var result = $("<div class='blogPost'><div class='blog-post-header'><h1 class='blog-post-title'>"+item.title+"</h1><span class='date'>"+item.date+"</span></div><div class='blog-post-body'><pre class='blog-post-content'>"+item.content+"</pre></div></div>");
-                    comments.append(result.hide().fadeIn(300 + index));
-                });
+        var isDeletePage = window.location.pathname === '/deleteblog';
+        console.log(isDeletePage)
+        data.forEach(function(item, index){
+            var result;
+            if(isDeletePage){
+                result = $("<div class='blogPost' data='"+item.id+"'><div class='blog-post-header'><div class='delete fa fa-times-circle'></div><h1 class='blog-post-title'>"+item.title+"</h1><span class='date'>"+item.date+"</span></div><div class='blog-post-body'><pre class='blog-post-content'>"+item.content+"</pre></div></div>");
             } else {
-                data.forEach(function(item, index){
-                    if(item.date === undefined){
-                        item.date = 'Today';
-                    }
-                    if(index === 0){
-                        var result = $("<div class='blogPost'><div class='blog-post-header'><h1 class='blog-post-title'>"+item.title+"</h1><span class='date'>"+item.date+"</span></div><div class='blog-post-body'><pre class='blog-post-content'>"+item.content+"</pre></div></div>");
-                        comments.append(result.hide().fadeIn(600));
-                        return;
-                    }
-                    comments.append("<div class='blogPost'><div class='blog-post-header'><h1 class='blog-post-title'>"+item.title+"</h1><span class='date'>"+item.date+"</span></div><div class='blog-post-body'><pre class='blog-post-content'>"+item.content+"</pre></div></div>");
-                });
+                result = $("<div class='blogPost' data='"+item.id+"'><div class='blog-post-header'><h1 class='blog-post-title'>"+item.title+"</h1><span class='date'>"+item.date+"</span></div><div class='blog-post-body'><pre class='blog-post-content'>"+item.content+"</pre></div></div>");
             }
+            // if(index === 0){
+            //     comments.append(result.hide().fadeIn(600));
+            //     return;
+            // }
+            comments.append(result);
+        });
+        // if(data.length){
+        //     if(firstTime){
+        //         data.forEach(function(item, index){
+        //             var result = $("<div class='blogPost' data='"+item.id+"'><div class='blog-post-header'><div class='delete fa fa-times-circle'></div><h1 class='blog-post-title'>"+item.title+"</h1><span class='date'>"+item.date+"</span></div><div class='blog-post-body'><pre class='blog-post-content' >"+item.content+"</pre></div></div>");
+        //             comments.append(result.hide().fadeIn(300 + index));
+        //         });
+            // } else {
+                // data.forEach(function(item, index){
+                //     if(item.date === undefined){
+                //         item.date = 'Today';
+                //     }
+                //     var result = $("<div class='blogPost' data='"+item.id+"'><div class='blog-post-header'><div class='delete fa fa-times-circle'></div><h1 class='blog-post-title'>"+item.title+"</h1><span class='date'>"+item.date+"</span></div><div class='blog-post-body'><pre class='blog-post-content'>"+item.content+"</pre></div></div>");
+                //     if(index === 0){
+                //         comments.append(result.hide().fadeIn(600));
+                //         return;
+                //     }
+                //     comments.append(result);
+                // });
+            // }
 
-        }
+        // }
     }
+
 });

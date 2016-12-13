@@ -1,7 +1,7 @@
 'use-strict';
 var cluster = require('cluster');
-
 if(cluster.isMaster) {
+    // initialize clusters on startup
     var numWorkers = require('os').cpus().length;
 
     console.log('Master cluster setting up ' + numWorkers + ' workers...');
@@ -19,7 +19,6 @@ if(cluster.isMaster) {
         console.log('Starting a new worker');
         cluster.fork();
     });
-
 } else {
     // dependencies
     var express = require('express');
@@ -28,6 +27,7 @@ if(cluster.isMaster) {
     var bodyParser = require('body-parser');
     var fs = require('fs');
     var moment = require('moment');
+    var _ = require('lodash');
 
     // instantiate express app
     var app = express();
@@ -37,6 +37,46 @@ if(cluster.isMaster) {
     app.use(express.static(__dirname));
     app.use(bodyParser.urlencoded({extended: true}));
     app.use(bodyParser.json());
+
+    // routes
+    app.route('/content')
+    .get(function(request, response){
+        getData('data/data.json', response);
+    })
+    .post(function(request, response){
+        writeData('data/data.json', request.body, request, response);
+    });
+
+    app.route('/postblog')
+    .get(function(request, response){
+        getData('data/blog-post-form.html', response);
+    })
+    .post(function(request, response){
+        writeData('data/data.json', request.body, request, response);
+    });
+
+    app.route('/deleteblog')
+    .get(function(request, response){
+        getData('data/delete-blog-post.html', response);
+    })
+    .post(function(request, response){
+        writeData('data/data.json', request.body, request, response);
+    });
+
+    app.route('/delete-single-blog-post')
+    .post(function(request, response){
+        var data = fs.readFile('data/data.json', 'utf-8', function(err, data){
+            if(err) console.log(err);
+            var blogPostId = parseInt(request.body.blogPostId);
+            data = JSON.parse(data);
+            data.forEach(function(post, index){
+                if(post.id === blogPostId){
+                    data.splice(index, 1);
+                    writeData('data/data.json', data, request, response);
+                }
+            });
+        });
+    });
 
     // helpers
     function getData(file, response){
@@ -66,14 +106,6 @@ if(cluster.isMaster) {
         });
     }
 
-    // routes
-    app.route('/content')
-    .get(function(request, response){
-        getData('data/data.json', response);
-    })
-    .post(function(request, response){
-        writeData('data/data.json', request.body, request, response);
-    });
     // server
     var PORT = process.env.PORT || 3000;
     var server = http.createServer(app).listen(PORT);

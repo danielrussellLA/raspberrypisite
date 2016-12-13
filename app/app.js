@@ -27,12 +27,6 @@ $(document).ready(function(){
         blogPostFormContent[0].innerText = '';
     });
 
-    // $('#delete').on('click', function(e){
-    //     e.preventDefault();
-    //     deleteContent();
-    // });
-
-
     // hide resume on load
     $('.resume').hide();
     // reveal resume
@@ -118,7 +112,6 @@ $(document).ready(function(){
         var comments = $('.comments');
         comments.children().remove();
         var isDeletePage = window.location.pathname === '/deleteblog';
-        console.log(isDeletePage)
         data.forEach(function(item, index){
             var result;
             if(isDeletePage){
@@ -126,33 +119,8 @@ $(document).ready(function(){
             } else {
                 result = $("<div class='blogPost' data='"+item.id+"'><div class='blog-post-header'><h1 class='blog-post-title'>"+item.title+"</h1><span class='date'>"+item.date+"</span></div><div class='blog-post-body'><pre class='blog-post-content'>"+item.content+"</pre></div></div>");
             }
-            // if(index === 0){
-            //     comments.append(result.hide().fadeIn(600));
-            //     return;
-            // }
             comments.append(result);
         });
-        // if(data.length){
-        //     if(firstTime){
-        //         data.forEach(function(item, index){
-        //             var result = $("<div class='blogPost' data='"+item.id+"'><div class='blog-post-header'><div class='delete fa fa-times-circle'></div><h1 class='blog-post-title'>"+item.title+"</h1><span class='date'>"+item.date+"</span></div><div class='blog-post-body'><pre class='blog-post-content' >"+item.content+"</pre></div></div>");
-        //             comments.append(result.hide().fadeIn(300 + index));
-        //         });
-            // } else {
-                // data.forEach(function(item, index){
-                //     if(item.date === undefined){
-                //         item.date = 'Today';
-                //     }
-                //     var result = $("<div class='blogPost' data='"+item.id+"'><div class='blog-post-header'><div class='delete fa fa-times-circle'></div><h1 class='blog-post-title'>"+item.title+"</h1><span class='date'>"+item.date+"</span></div><div class='blog-post-body'><pre class='blog-post-content'>"+item.content+"</pre></div></div>");
-                //     if(index === 0){
-                //         comments.append(result.hide().fadeIn(600));
-                //         return;
-                //     }
-                //     comments.append(result);
-                // });
-            // }
-
-        // }
     }
 
 });

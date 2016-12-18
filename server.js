@@ -37,12 +37,6 @@ if(cluster.isMaster) {
     app.use(bodyParser.urlencoded({extended: true}));
     app.use(bodyParser.json());
 
-    // routes
-    // app.route('/')
-    // .get(function(request, response){
-    //     response.render('index');
-    // });
-
     app.route('/content')
     .get(function(request, response){
         getData('data/data.json', response);
@@ -84,19 +78,10 @@ if(cluster.isMaster) {
 
     // helpers
     function getData(file, response){
-        fs.readFile(file, 'utf-8', function(err, data){
-            if(err){
-                response.send(err);
-            }
-            response.status(200).send(data);
-        });
+        var stream = fs.createReadStream(file);
+        stream.pipe(response);
     }
 
-    function addTimeStamp(data){
-        var mostRecentPost = data[0];
-        var formattedDate = moment().format("MMM Do YYYY");
-        mostRecentPost.date = formattedDate;
-    }
 
     function writeData(file, data, request, response){
         if(data.length !== 0){
@@ -110,6 +95,12 @@ if(cluster.isMaster) {
         });
     }
 
+    function addTimeStamp(data){
+        var mostRecentPost = data[0];
+        var formattedDate = moment().format("MMM Do YYYY");
+        mostRecentPost.date = formattedDate;
+    }
+    
     // server
     var PORT = process.env.PORT || 3000;
     var server = http.createServer(app).listen(PORT);

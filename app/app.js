@@ -123,4 +123,27 @@ $(document).ready(function(){
         });
     }
 
+    // CLOCK
+    // This is my vanilla JS clock. I could have used moment.js, but this was more fun to figure out.
+    var clock = document.getElementById('clock');
+
+    clock.innerHTML = getCurrentTime();
+
+    setInterval(function(){
+        clock.innerHTML = getCurrentTime();
+    }, 1000);
+
+    function getCurrentTime() {
+        var currentDate = new Date();
+        var hours = currentDate.getHours() > 12 ? currentDate.getHours() - 12 : currentDate.getHours();
+        hours === 0 ? 12 : hours;
+        var minutes = currentDate.getMinutes();
+        minutes = minutes+'';
+        minutes = minutes.length < 2 ? '0' + minutes : minutes;
+        var seconds = currentDate.getSeconds() < 10 ? '0' + currentDate.getSeconds() : currentDate.getSeconds();
+        var timeconvention = currentDate.getHours() < 12 ? 'AM' : 'PM';
+        var currentTime = hours + ':' + minutes + ':' + seconds  + ' ' + timeconvention;
+        return currentTime;
+    }
+
 });

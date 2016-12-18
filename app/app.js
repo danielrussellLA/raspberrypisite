@@ -146,4 +146,15 @@ $(document).ready(function(){
         return currentTime;
     }
 
+    var liveType = document.getElementById('liveType');
+    var text = 'oftware Engineer'.split('');
+    var doLiveType = setInterval(function(){
+        if(text.length){
+            $('#liveType')[0].innerHTML += text[0];
+            text.shift();
+        } else {
+            clearInterval(doLiveType);
+        }
+    }, 100);
+
 });

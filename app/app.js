@@ -67,6 +67,25 @@ $(document).ready(function(){
         });
     });
 
+    $(document).on('keypress', function(e){
+        e = e || window.event;
+        if(e.keyCode == 19){
+            e.preventDefault();
+            var index = data.length;
+            var blogPostFormTitle = $('.blog-post-form-title');
+            var blogPostFormContent = $('.blog-post-form-content');
+            var post = {
+                id: index,
+                title: blogPostFormTitle.val(),
+                content: blogPostFormContent[0].innerText
+            };
+            data.unshift(post);
+            postContent(data, false);
+            blogPostFormTitle.val('');
+            blogPostFormContent[0].innerText = '';
+        }
+    });
+
     // Post a new blog post
     function postContent(blog_posts, isDeleting){
         if(isDeleting){

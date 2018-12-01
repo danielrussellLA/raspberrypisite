@@ -25,11 +25,17 @@ if(cluster.isMaster) {
     // express
     var express = require('express');
     // middleware
-    var http = require('http');
+    var https = require('https');
     var morgan = require('morgan');
     var bodyParser = require('body-parser');
     // helpers
     var helpers = require('./server_helpers.js');
+    var fs = require('fs');
+    var privateKey = fs.readFileSync('./private.key', 'utf8');
+    var certificate = fs.readFileSync('./engineeringdan_com.crt', 'utf8');
+
+    var credentials = {key: privateKey, cert: certificate}; 
+    var ip = '10.245.141.137';
 
     // instantiate express app
     var app = express();
@@ -71,7 +77,7 @@ if(cluster.isMaster) {
     });
 
     // create/run server
-    var PORT = process.env.PORT || 3000;
-    var server = http.createServer(app).listen(PORT);
+    var PORT = process.env.PORT || 443;
+    var server = https.createServer(credentials, app).listen(PORT, ip);
     console.log('listening on port '+PORT);
 }

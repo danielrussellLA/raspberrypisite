@@ -35,7 +35,7 @@ if(cluster.isMaster) {
     var certificate = fs.readFileSync('./engineeringdan_com.crt', 'utf8');
 
     var credentials = {key: privateKey, cert: certificate}; 
-    var ip = '10.245.141.137';
+    var ip = '192.168.1.190'; // static ip address of raspberry pi
 
     // instantiate express app
     var app = express();
